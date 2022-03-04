@@ -64,7 +64,7 @@ function ExpenseForm(props) {
 
         const expenseData = {
             title: enteredTitle,
-            amount: enteredAmount,
+            amount: +enteredAmount,
             date: new Date(enteredDate)
         }
 
@@ -91,11 +91,12 @@ function ExpenseForm(props) {
         </div>
         <div className="new-expense__controls">
           <label>Amount</label>
-          <input type="date" value={enteredDate}min="2019-01-01" step="2022-12-31" onChange={dateChangeHandler}/>
+          <input type="date" value={enteredDate} min="2019-01-01" step="2022-12-31" onChange={dateChangeHandler}/>
           {/*the value here shows the input bar will display the state value, once it is cleared the input will be cleared*/}
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type='button' onClick={props.onCancel}>Cancel</button>
           <button type="submit">Add Expense</button>
         </div>
     </form>

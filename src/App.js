@@ -1,10 +1,9 @@
 import Expenses from "./component/Expenses/Expenses";
-import ExpensesFilter from "./component/ExpensesFilter/ExpensesFilter";
 import NewExpense from "./component/NewExpense/NewExpense";
-
+import React, { useState } from 'react';
 function App() {
 
-  const expenses = [
+  const DUMMY_EXPENSES = [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -25,8 +24,20 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
   function addExpenseHandler(expense) {
+    
+    setExpenses(preExpeneses => {
+      const tmp = [expense, ...preExpeneses];
+      console.log(tmp)
+      return tmp;
+      /*
+      if we only pass an value in setExpenses, it will not execute right away,
+      Passing an update function allows you to access the current state value inside the updater.
+      */
+    });
+
     //expese is the data passed up
     console.log('In App.js');
     console.log(expense);
@@ -34,7 +45,6 @@ function App() {
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler}/>
-      <ExpensesFilter />
       <Expenses items={expenses}/>
     </div>
   );
